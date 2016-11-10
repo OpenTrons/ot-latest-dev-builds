@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask import render_template
 
@@ -13,4 +15,4 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(port=os.environ.get('PORT', 5000))
