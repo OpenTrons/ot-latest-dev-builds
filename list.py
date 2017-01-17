@@ -20,13 +20,13 @@ def get_builds_by_prefix(prefix):
     return sorted(bucket.list(prefix=prefix), key=lambda k: k.last_modified)
 
 
-def get_latest_builds(prefix, lim=10):
+def get_latest_builds(prefix, branch='master', lim=10):
     all_builds = get_builds_by_prefix(prefix)
 
     # keep builds that end with zip, exe or deb ignore dmgs, nupks, etc...
     def can_keep(build):
         return any([
-            build.name.endswith(i) and ('master' in build.name)
+            build.name.endswith(i) and (branch in build.name)
             for i in ('.zip', '.exe', '.deb')
         ])
 
@@ -37,12 +37,12 @@ def get_latest_builds(prefix, lim=10):
 
 
 
-def get_builds_dict():
+def get_builds_dict(branch='master'):
     prefixes = ['mac', 'win', 'linux']
     builds_dict = dict((k, []) for k in prefixes)
     url_tmpl = "https://s3.amazonaws.com/ot-app-builds/{name}"
     for prefix in prefixes:
-        for i, key in enumerate(get_latest_builds(prefix, lim=1)):
+        for i, key in enumerate(get_latest_builds(prefix, branch=branch, lim=1)):
             builds_dict[prefix].append({
                 'index': i,
                 'url': url_tmpl.format(name=key.name),

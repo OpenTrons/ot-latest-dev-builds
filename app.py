@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, request
 from flask import render_template
 
 from list import get_builds_dict
@@ -11,7 +11,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('index.html', builds=get_builds_dict())
+    branch = request.args.get('branch') or 'master'
+    return render_template('index.html', builds=get_builds_dict(branch=branch))
 
 
 if __name__ == '__main__':
