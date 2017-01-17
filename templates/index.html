@@ -5,7 +5,7 @@
   <body>
     <h3>Latest Mac App</h3>
     {% for build in builds.mac %}
-    <a href="{{ build.url }}">{{ build.name }}</a>
+    <a href="{{ build.url }}">{{ build.name }}</a>&nbsp;&nbsp;({{ build.last_modified|humanize() }})
     <hr>
     <br>
     <br>
@@ -13,7 +13,7 @@
 
     <h3>Latest Win App</h3>
     {% for build in builds.win %}
-    <a href="{{ build.url }}">{{ build.name }}</a>
+    <a href="{{ build.url }}">{{ build.name }}</a>&nbsp;&nbsp;({{ build.last_modified|humanize() }})
     <hr>
     <br>
     <br>
@@ -21,7 +21,7 @@
 
     <h3>Latest Linux App</h3>
     {% for build in builds.linux %}
-    <a href="{{ build.url }}">{{ build.name }}</a>
+    <a href="{{ build.url }}">{{ build.name }}</a>&nbsp;&nbsp;({{ build.last_modified|humanize() }})
     <hr>
     <br>
     <br>

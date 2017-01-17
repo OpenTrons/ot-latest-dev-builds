@@ -2,12 +2,13 @@ import os
 
 from flask import Flask, request
 from flask import render_template
+from flask_humanize import Humanize
 
 from list import get_builds_dict
 
 
 app = Flask(__name__)
-
+humanize = Humanize(app)
 
 @app.route('/')
 def home():
